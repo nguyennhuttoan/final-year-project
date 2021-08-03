@@ -1,8 +1,10 @@
 const Product = require('../models/ProductModel');
 const errHandler = require('../utils/errorHandler');
 const asyncErrHandler = require('../middlewares/asyncErrorHandler');
+const APIHelper = require('../utils/apiHelper');
 
 exports.newProduct = asyncErrHandler(async (req, res, next) => {
+  req.body.user = req.user.id;
   const product = await Product.create(req.body);
   res.status(201).json({
     success: true,
@@ -11,7 +13,12 @@ exports.newProduct = asyncErrHandler(async (req, res, next) => {
 });
 
 exports.getProducts = asyncErrHandler(async (req, res, next) => {
-  const products = await Product.find();
+  const productPerPage = 4;
+  const apiHelper = new APIHelper(Product.find(), req.query)
+    .search()
+    .filter()
+    .pagination(productPerPage);
+  const products = await apiHelper.query;
 
   res.status(200).json({
     success: true,
