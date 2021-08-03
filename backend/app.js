@@ -1,4 +1,5 @@
 const express = require('express');
+const orders = require('./routes/order');
 const products = require('./routes/product');
 const auth = require('./routes/auth');
 const errMiddleware = require('./middlewares/errors');
@@ -8,6 +9,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
+app.use('/api/v1', orders);
 app.use('/api/v1', products);
 app.use('/api/v1', auth);
 
