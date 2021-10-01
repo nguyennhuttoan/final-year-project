@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const connectDb = () => {
+const connectDatabase = () => {
   mongoose
     .connect(process.env.DB_LOCAL_URI, {
       useNewUrlParser: true,
@@ -8,8 +8,10 @@ const connectDb = () => {
       useCreateIndex: true,
     })
     .then((con) => {
-      console.log(`MongoDB Db connected with host: ${con.connection.host}`);
+      console.log(
+        `MongoDB Database connected with HOST: ${con.connection.host}`
+      );
     });
 };
 
-module.exports = connectDb;
+module.exports = connectDatabase;
