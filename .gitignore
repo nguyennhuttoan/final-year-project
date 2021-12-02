@@ -8,7 +8,7 @@
 /frontend/build
 
 # misc
-/src/config/config.env
+/src/.env
 
 npm-debug.log*
 yarn-debug.log*
